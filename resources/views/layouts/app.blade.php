@@ -14,6 +14,11 @@
     <!-- AOS Animation CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
     <style>
         body { 
             background-color: #f5e6f7; 
@@ -29,7 +34,7 @@
             padding: 10px 0;
         }
         .nav-link { 
-            color: white !important; 
+            color: black !important; 
             font-size: 18px; /* Perkecil font */
             font-weight: bold; /* Tebalkan font */
             padding: 15px 30px; /* Tambah jarak antar item */
@@ -37,14 +42,14 @@
             transition: color 0.3s ease-in-out; 
         }
         .nav-link:hover, .nav-link.active { 
-            color: #ffeb3b !important; 
+            color:rgb(122, 49, 141) !important; 
         }
         .nav-link.active::after {
             content: "";
             display: block;
             width: 100%;
             height: 3px;
-            background-color: #ffeb3b;
+            background-color: rgb(122, 49, 141);
             position: absolute;
             bottom: -5px;
             left: 0;
@@ -78,9 +83,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
         <!-- Logo di kiri -->
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <!-- <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('images/carousel/logo.png') }}" class="logo" alt="MM Bakery">
-        </a>
+        </a> -->
         
         <!-- Navigasi di kanan -->
         <div class="collapse navbar-collapse" id="navbarNav">

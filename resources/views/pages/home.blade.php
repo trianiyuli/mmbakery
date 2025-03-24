@@ -71,15 +71,15 @@
 
 <!-- CSS Custom -->
 <style>
-    /* Mengatur ukuran gambar agar tidak terlalu besar & proporsional */
+    /* Pengaturan ukuran gambar slide */
     .image-container {
-        height: 250px; /* Sesuaikan tinggi agar proporsional */
+        height: 250px; 
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #fff; /* Warna latar agar serasi */
-        border-radius: 10px; /* Bikin lebih estetik */
+        background-color: #fff;
+        border-radius: 10px;
         padding: 10px;
     }
 
@@ -97,12 +97,13 @@
     }
 
     .img-hover:hover .image-container img {
-        transform: scale(1.05); /* Smooth efek tanpa berlebihan */
+        transform: scale(1.05);
     }
 </style>
 
 <!-- Tentang Kami -->
-<section id="tentang" class="container my-5" data-aos="fade-up">
+
+<section id="tentang" class="container my-5 pb-5" data-aos="fade-up"> 
     <div class="row align-items-center">
         <div class="col-md-6">
             <h2 class="fw-bold">Tentang Kami</h2>
@@ -132,18 +133,157 @@
     });
 </script>
 
-
 <!-- Outlet -->
 <section id="outlet" class="container text-center my-5">
     <h2 class="fw-bold">Outlet Kami</h2>
     <p>Temukan outlet kami di berbagai lokasi strategis.</p>
+
+    <div class="row justify-content-center mt-4">
+
+<!-- Outlet Pusat -->
+<div class="col-md-4 mb-4">
+    <div class="card glassmorphism p-3 fade-in">
+        <strong>Outlet Pusat</strong>
+        <p>Jl. Mayor Jendral Di Panjaitan No.79, Banjarejo, Kec. Taman, Kota Madiun, Jawa Timur 63137</p>
+        <img src="{{ asset('images/foto_outlet/outletpusat.jpg') }} "class="rounded w-100" alt="Outlet Pusat">
+        <a href="https://maps.app.goo.gl/7DtW4KQfvSSU2S6N6" target="_blank" class="btn btn-primary mt-2">Lihat di Google Maps</a>
+    </div>
+</div>
+
+<!-- Outlet Cabang 1 -->
+<div class="col-md-4 mb-4">
+    <div class="card glassmorphism p-3 fade-in">
+        <strong>Outlet Cabang 1</strong>
+        <p>Jalan Raya Kajang RT.23/RW.4 Candi, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur 63151</p>
+        <img src="{{ asset('images/foto_outlet/cabang1.jpg') }}"class="rounded w-100" alt="Outlet Cabang 1">
+        <a href="https://maps.app.goo.gl/W7ab3HqBv6M9o85Q9" target="_blank" class="btn btn-primary mt-2">Lihat di Google Maps</a>
+    </div>
+</div>
+
+<!-- Outlet Cabang 2 -->
+<div class="col-md-4 mb-4">
+    <div class="card glassmorphism p-3 fade-in">
+        <strong>Outlet Cabang 2</strong>
+        <p>Jl. Raya Pagotan, RT.30/RW.8, Gilingan, Uteran, Kec. Geger, Kabupaten Madiun, Jawa Timur 63171</p>
+        <img src="{{ asset('images/foto_outlet/cabang1.jpg') }} "class="rounded w-100" alt="Outlet Cabang 2">
+        <a href="https://maps.app.goo.gl/bjDdFzdCz7L4nE8V7" target="_blank" class="btn btn-primary mt-2">Lihat di Google Maps</a>
+    </div>
+</div>
 </section>
+
+
+
+
+
+
 
 <!-- Kontak -->
 <section id="kontak" class="container text-center my-5">
     <h2 class="fw-bold">Hubungi Kami</h2>
-    <p><i class="bi bi-geo-alt-fill"></i> Jl. Mayor Jend. Di Panjaitan No.79, Kota Madiun, Jawa Timur</p>
-    <p><i class="bi bi-telephone-fill"></i> 0812-3456-7890 | <i class="bi bi-envelope-fill"></i> contact@mmbakery.com</p>
+
+    <div class="d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center gap-4">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6281259176660" target="_blank" class="contact-icon text-success">
+                <i class="bi bi-whatsapp fs-3"></i>
+            </a>
+
+            <!-- Email -->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mmbakerymadiun.com" 
+             target="_blank" class="contact-icon text-primary">
+                <i class="bi bi-envelope-fill fs-3"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/mmmadiun1?igsh=bG8yNDA5eW5ocmNy" target="_blank" class="contact-icon text-danger">
+                <i class="bi bi-instagram fs-3"></i>
+            </a>
+        </div>
+
+        <p class="mt-2">
+            <a href="https://wa.me/6281259176660" target="_blank" class="text-decoration-none text-dark"> 0812-5917-6660</a> |
+            <a href="mailto:contact@mmbakerymadiun.com" target="_blank" class="text-decoration-none text-dark"> @mmbakerymadiun.com</a> |
+            <a href="https://www.instagram.com/mmmadiun1?igsh=bG8yNDA5eW5ocmNy" target="_blank" class="text-decoration-none text-dark">@mmmadiun1</a>
+        </p>
+    </div>
 </section>
 
-@endsection
+<!-- CSS Custom -->
+<style>
+ .contact-icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.contact-icon:hover {
+    transform: scale(1.2);
+}
+
+.text-primary {
+    color: #007bff !important; /* Warna biru khas Gmail */
+}
+
+/* Pusatkan ikon dan teks di bawahnya */
+.d-flex.flex-column {
+    gap: 10px;
+}
+
+.d-flex.justify-content-center {
+    align-items: center;
+}
+
+.outlet-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.outlet-card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 350px; /* Sesuaikan sesuai kebutuhan */
+}
+
+.outlet-map iframe {
+    width: 100%;
+    height: 250px; /* Tetapkan tinggi yang sama untuk semua */
+    border-radius: 10px;
+}
+
+/* Efek hover pada kartu outlet */
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Kartu sedikit naik */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Efek hover pada ikon kontak */
+.contact-icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.contact-icon:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Tambahan efek smooth hover pada bagian outlet */
+.outlet-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.outlet-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+</style>
