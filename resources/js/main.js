@@ -6,5 +6,6 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             navbar.classList.remove("scrolled");
         }
+        
     });
 });
