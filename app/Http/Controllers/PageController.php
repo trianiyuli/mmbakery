@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Outlet;
 
 class PageController extends Controller
 {
@@ -18,11 +19,26 @@ class PageController extends Controller
         return view('pages.tentang');
     }
 
+    // public function outlet() {
+    //     return view('pages.outlet');
+    // }
     public function outlet() {
-        return view('pages.outlet');
+        $outlets = Outlet::all()->map(function ($outlet) {
+            return [
+                'name' => $outlet->name,
+                'address' => $outlet->address,
+                'lat' => (float) $outlet->lat,
+                'lng' => (float) $outlet->lng
+            ];
+        });
+    
+        return view('pages.outlet', compact('outlets'));
     }
 
     public function kontak() {
         return view('pages.kontak');
+    }
+    public function test() {
+        
     }
 }
