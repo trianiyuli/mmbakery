@@ -75,7 +75,7 @@
             <i class="bi bi-list" style="font-size: 1.5rem; color: #611cb7;"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('produk') }}">Produk</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('tentang') }}">Tentang Kami</a></li>
@@ -83,11 +83,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('kontak') }}">Kontak</a></li>
             </ul>
         </div>
-        
-        <!-- Tombol toggle untuk mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
 </nav>
 
@@ -111,17 +106,6 @@
         duration: 1000, // Durasi animasi dalam milidetik (1 detik)
         easing: "ease-in-out", // Efek transisi
         once: true, // Animasi hanya muncul sekali
-    });
-
-    // Tambahkan class 'active' ke link yang sedang aktif
-    document.addEventListener("DOMContentLoaded", function() {
-        let links = document.querySelectorAll(".nav-link");
-        let currentUrl = window.location.href;
-        links.forEach(link => {
-            if (link.href === currentUrl) {
-                link.classList.add("active");
-            }
-        });
     });
 </script>
 

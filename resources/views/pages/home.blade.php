@@ -110,6 +110,23 @@
                 <span class="carousel-control-next-icon"></span>
             </button>
         </div>
+    </section>
+
+    <!-- Produk Unggulan Kami -->
+<section id="produk" class="container my-5">
+    <h2 class="text-center fw-bold">Produk Unggulan Kami</h2>
+    <div class="row g-4">
+        @foreach([['Roti Pisang Keju', 'unggulan1.jpg'], ['Coklat Pisang', 'unggulan2.jpg'], ['Srikaya Pandan', 'unggulan3.jpg']] as $produk)
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 img-hover">
+                <div class="image-container">
+                    <img src="{{ asset('images/produk/'.$produk[1]) }}" class="card-img-top" alt="{{ $produk[0] }}">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">{{ $produk[0] }}</h5>
+                </div>
+            </div>
+        </div>
         @endforeach
     </div>
 </section>
@@ -332,3 +349,4 @@
 
 
 </style>
+@endsection
