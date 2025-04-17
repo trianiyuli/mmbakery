@@ -13,7 +13,7 @@ Route::get('/produk', [PageController::class, 'produk'])->name('produk');
 Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
 Route::get('/outlet', [PageController::class, 'outlet'])->name('outlet');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
-Route::get('/outlets', [PageController::class, 'outlet'])->name('outlet');
+// Route::get('/outlets', [PageController::class, 'outlet'])->name('outlet');
 
 // Login & Admin
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

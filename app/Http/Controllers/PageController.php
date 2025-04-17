@@ -19,20 +19,8 @@ class PageController extends Controller
         return view('pages.tentang');
     }
 
-    // public function outlet() {
-    //     return view('pages.outlet');
-    // }
     public function outlet() {
-        $outlets = Outlet::all()->map(function ($outlet) {
-            return [
-                'name' => $outlet->name,
-                'address' => $outlet->address,
-                'lat' => (float) $outlet->lat,
-                'lng' => (float) $outlet->lng
-            ];
-        });
-    
-        return view('pages.outlet', compact('outlets'));
+        return view('pages.outlet');
     }
 
     public function kontak() {
