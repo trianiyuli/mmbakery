@@ -43,9 +43,9 @@
         .cardlogin {
             padding: 80px 50px !important;
             border-top: 4px solid #611cb7 !important;     /* Ungu */
-    border-right: 4px solid #ff9800 !important;   /* Oranye */
-    border-bottom: 4px solid #4caf50 !important;  /* Hijau */
-    border-left: 4px solid #2196f3 !important;    /* Biru */
+            border-right: 4px solid #ff9800 !important;   /* Oranye */
+            border-bottom: 4px solid #4caf50 !important;  /* Hijau */
+            border-left: 4px solid #2196f3 !important;    /* Biru */
         }
     </style>
 </head>
@@ -62,8 +62,8 @@
                     <form method="POST" action="{{ route('login.process') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" id="username" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
