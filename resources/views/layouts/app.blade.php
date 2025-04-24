@@ -5,107 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MM Bakery</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- AOS Animation CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <!-- font -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Brush+Script+MT&display=swap" rel="stylesheet">
 
+    <!-- Tailwind & AOS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <style>
         body {
-            background-color: #ffffff;
+            font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Pastikan body mengambil tinggi penuh viewport */
-        }
-        .navbar {
-            background-color: #ffffff;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: background 0.3s ease-in-out;
-        }
-        .nav-link {
-            color: #611cb7 !important;
-            transition: 0.1s;
-        }
-        .nav-link:hover {
-            color: #611cb7 !important;
-            font-weight: 800;
-        }
-        .content {
-            margin-top: auto;
-            padding-top: 74px; /* Tambahkan padding agar konten tidak tertutup navbar */
-            flex: 1; /* Konten utama mengambil sisa ruang yang tersedia */
-        }
-        footer {
-            background: #611cb7;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: auto; /* Footer akan selalu menempel di bagian bawah */
-        }
-        .logo {
-            height: 40px;
         }
         .company-name {
             font-family: 'Brush Script MT', cursive;
-            font-size: xx-large;
+        }
+        nav a {
             color: #611cb7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            font-weight: bold;
         }
     </style>
 </head>
-<body>
+<body class="bg-white flex flex-col min-h-screen">
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <!-- <img src="{{ asset('images/carousel/logo.png') }}" class="logo" alt="MM Bakery"> -->
-            <span class="company-name">MM Bakery</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <i class="bi bi-list" style="font-size: 1.5rem; color: #611cb7;"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('produk') }}">Produk</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('tentang') }}">Tentang Kami</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('outlet') }}">Outlet</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('kontak') }}">Kontak</a></li>
-            </ul>
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="{{ route('home') }}" class="text-2xl text-[#611cb7] font-bold company-name">MM Bakery</a>
+
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex space-x-6 items-center">
+            <li><a href="{{ route('home') }}">Beranda</a></li>
+            <li><a href="{{ route('produk') }}">Produk</a></li>
+            <li><a href="{{ route('tentang') }}">Tentang Kami</a></li>
+            <li><a href="{{ route('outlet') }}">Outlet</a></li>
+            <li><a href="{{ route('kontak') }}">Kontak</a></li>
+        </ul>
+
+        <!-- Hamburger Button -->
+        <div class="md:hidden">
+            <button @click="open = !open" class="text-[#611cb7] text-2xl focus:outline-none">
+                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden" x-show="open" x-transition>
+        <ul class="bg-white space-y-2 px-4 pb-4">
+            <li><a href="{{ route('home') }}" class="block">Beranda</a></li>
+            <li><a href="{{ route('produk') }}" class="block">Produk</a></li>
+            <li><a href="{{ route('tentang') }}" class="block">Tentang Kami</a></li>
+            <li><a href="{{ route('outlet') }}" class="block">Outlet</a></li>
+            <li><a href="{{ route('kontak') }}" class="block">Kontak</a></li>
+        </ul>
     </div>
 </nav>
 
-<!-- Konten Dinamis dengan Efek AOS -->
-<div class="content" data-aos="fade-up">
+<!-- Konten Dinamis -->
+<div class="pt-24 flex-1" data-aos="fade-up">
     @yield('content')
 </div>
 
 <!-- Footer -->
-<footer>
+<footer class="bg-[#611cb7] text-white text-center py-4">
     <p>&copy; 2025 MM Bakery. All rights reserved.</p>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- AOS Animation JS -->
+<!-- AOS JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
     AOS.init({
-        duration: 1000, // Durasi animasi dalam milidetik (1 detik)
-        easing: "ease-in-out", // Efek transisi
-        once: true, // Animasi hanya muncul sekali
+        duration: 1000,
+        easing: "ease-in-out",
+        once: true,
     });
 </script>
 

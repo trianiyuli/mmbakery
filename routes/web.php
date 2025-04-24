@@ -18,5 +18,11 @@ Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 // Login & Admin
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
-Route::get('/admin/dashboard', [AuthController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/dashboard', [AuthController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/products', [AuthController::class, 'products'])->name('admin.products');
+    Route::get('/admin/users', [AuthController::class, 'users'])->name('admin.users');
+    Route::get('/admin/settings', [AuthController::class, 'settings'])->name('admin.settings');
+    Route::get('/admin/reports', [AuthController::class, 'reports'])->name('admin.reports');
+});
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
