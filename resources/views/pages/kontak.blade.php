@@ -130,13 +130,15 @@
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800">Email</h3>
-                                    <a href="mailto:contact@mmbakerymadiun.com" 
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mmbakerymadiun.com&su=Pertanyaan%20seputar%20produk%20MM%20Bakery&body=Halo%20MM%20Bakery%2C%20saya%20ingin%20bertanya%20mengenai..."
+                                       target="_blank" 
+                                       rel="noopener noreferrer"
                                        class="text-gray-600 hover:text-blue-600 transition mt-1 block">
-                                        contact@mmbakerymadiun.com
+                                       contact@mmbakerymadiun.com
                                     </a>
                                 </div>
                             </div>
-                        </div>
+
                         
                         <div class="mt-10 pt-6 border-t border-gray-200">
                             <h3 class="text-lg font-semibold text-gray-800 mb-4">Jam Operasional</h3>
