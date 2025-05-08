@@ -33,70 +33,9 @@ class AuthController extends Controller
         return back()->with('error', 'Email atau password salah.');
     }
 
-    public function index()
-    {
-        if (!Session::get('is_admin')) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return response()
-        ->view('admin.dashboard')
-        ->header('Cache-Control','no-cache, no-store, must-revalidate')
-        ->header('Pragma','no-cache')
-        ->header('Expires','0');
-    }
-    public function products()
-    {
-        if (!Session::get('is_admin')) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return response()
-        ->view('admin.products')
-        ->header('Cache-Control','no-cache, no-store, must-revalidate')
-        ->header('Pragma','no-cache')
-        ->header('Expires','0');
-    }
-    public function users()
-    {
-        if (!Session::get('is_admin')) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return response()
-        ->view('admin.users')
-        ->header('Cache-Control','no-cache, no-store, must-revalidate')
-        ->header('Pragma','no-cache')
-        ->header('Expires','0');
-    }
-    public function settings()
-    {
-        if (!Session::get('is_admin')) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return response()
-        ->view('admin.settings')
-        ->header('Cache-Control','no-cache, no-store, must-revalidate')
-        ->header('Pragma','no-cache')
-        ->header('Expires','0');
-    }
-    public function reports()
-    {
-        if (!Session::get('is_admin')) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return response()
-        ->view('admin.reports')
-        ->header('Cache-Control','no-cache, no-store, must-revalidate')
-        ->header('Pragma','no-cache')
-        ->header('Expires','0');
-    }
-
     public function logout()
     {
-        Session::forget('is_admin');
+        Session::flush(); // Hapus semua session
         return redirect()->route('login')->withHeaders([
             'Cache-Control' => 'no-cache, no-store, must-revalidate',
             'Pragma' => 'no-cache',

@@ -1,4 +1,4 @@
-@props(['href', 'active', 'icon', 'label'])
+<!-- @props(['href', 'active', 'icon', 'label'])
 
 @php
     $classes = $active 
@@ -8,4 +8,4 @@
 
 <a href="{{ $href }}" class="{{ $classes }}">
     <i class="{{ $icon }} mr-3"></i> {{ $label }}
-</a>
+</a> -->
