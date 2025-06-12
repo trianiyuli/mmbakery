@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Outlet;
+use App\Models\Product;
 
 class PageController extends Controller
 {
     public function home() {
-        return view('pages.home');
+        $featuredProducts = Product::where('unggulan', true)
+                                  ->orderBy('created_at', 'desc')
+                                  ->take(3)
+                                  ->get();
+        
+        return view('pages.home', compact('featuredProducts'));
     }
 
     public function produk() {
-        return view('pages.produk');
+        $products = Product::all();
+        return view('pages.produk', ['products' => $products]);
     }
 
     public function tentang() {

@@ -6,14 +6,32 @@
         .border-red-500 {
             border-color: #ef4444;
         }
+        .backdrop-blur {
+            backdrop-filter: blur(2px);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            #search-user {
+                min-width: 100%;
+            }
+            .notification-mobile {
+                width: 90%;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 1rem;
+            }
+        }
     </style>
-    <div class="container mx-auto px-4 py-6">
+    <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
         <!-- Success Notification -->
         @if(session('success'))
-        <div id="success-notification" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 flex items-center justify-between min-w-[300px] transition-all duration-300 transform translate-x-0">
-            <span>{{ session('success') }}</span>
-            <button onclick="closeNotification()" class="ml-4 text-white hover:text-gray-200 focus:outline-none">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div id="success-notification" class="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded shadow-lg z-50 flex items-center justify-between min-w-[250px] sm:min-w-[300px] notification-mobile transition-all duration-300 transform translate-x-0">
+            <span class="text-sm sm:text-base">{{ session('success') }}</span>
+            <button onclick="closeNotification()" class="ml-4 text-white hover:text-gray-100 focus:outline-none">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -21,34 +39,33 @@
         @endif
 
         <!-- Header with search and add button -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800">Manajemen User</h2>
-                <p class="text-gray-600">Manajemen semua user yang terdaftar</p>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
+            <div class="w-full md:w-auto">
+                <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Akun User</h2>
             </div>
-            <div class="flex gap-3 w-full md:w-auto">
-                <div class="relative flex-grow md:flex-grow-0">
-                    <input id="search-user" type="text" placeholder="Search users..." 
-                           class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <div class="relative flex-grow md:flex-grow-0 w-full sm:w-auto">
+                    <input id="search-user" type="text" placeholder="Cari user..." 
+                           class="w-full pl-10 pr-4 py-2 text-sm sm:text-base rounded-lg bg-white border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500">
                     <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
                 @if($role === 'superadmin')
-                <button onclick="openAddUserModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onclick="openAddUserModal()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-colors cursor-pointer text-sm sm:text-base">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    Add User
+                    Tambah User
                 </button>
                 @endif
             </div>
         </div>
 
         <!-- Users Table -->
-        <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
             <div class="overflow-x-auto">
-                <div id="users-table-container">
+                <div id="users-table-container" class="min-w-full">
                     @include('admin.partials.users_table', ['users' => $users, 'role' => $role])
                 </div>
             </div>
@@ -84,56 +101,6 @@
                 }, 3000);
             }
         });
-
-        // Modal open functions (called from table buttons)
-        function openAddUserModal() {
-            document.getElementById('add-user-modal').classList.remove('hidden');
-        }
-
-        function openEditUserModal(user) {
-            const userObj = typeof user === 'string' ? JSON.parse(user) : user;
-            const modal = document.getElementById('edit-user-modal');
-            const form = document.getElementById('editUserForm');
-            const currentUserRole = "{{ $role }}";
-            
-            // Set form values
-            form.querySelector('#edit_name').value = userObj.name;
-            form.querySelector('#edit_email').value = userObj.email;
-            form.querySelector('#edit_user_id').value = userObj.id;
-            
-            // Update form action
-            form.action = "{{ route('admin.users.update', '') }}/" + userObj.id;
-            
-            // Only show role field for superadmin
-            const roleField = document.getElementById('edit_role_container');
-            if (currentUserRole === 'superadmin') {
-                roleField.classList.remove('hidden');
-                document.getElementById('edit_role').value = userObj.role;
-            } else {
-                roleField.classList.add('hidden');
-            }
-            
-            document.getElementById('edit_profile-preview').src = userObj.photo 
-                ? `/storage/${userObj.photo}` 
-                : 'https://via.placeholder.com/150';
-            
-            modal.classList.remove('hidden');
-        }
-
-        function openDeleteUserModal(userId, userName) {
-        const modal = document.getElementById('delete-user-modal');
-        const form = document.getElementById('deleteUserForm');
-        
-        // Set confirmation message
-        document.getElementById('delete-user-message').textContent = 
-            `Apakah Anda yakin ingin menghapus user ${userName}? Aksi ini tidak dapat dibatalkan.`;
-        
-        // Set form action
-        form.action = "{{ route('admin.users.destroy', '') }}/" + userId;
-        document.getElementById('delete_user_id').value = userId;
-        
-        modal.classList.remove('hidden');
-    }
 
     // Search functionality
     document.getElementById('search-user').addEventListener('input', function(e) {

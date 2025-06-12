@@ -37,7 +37,7 @@
 <body class="bg-white flex flex-col min-h-screen">
 
 <!-- Navbar -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md" x-data="{ open: false }">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md" x-data="{ open: false }" id="mainNavbar">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <!-- Logo -->
         <a href="{{ route('home') }}" class="text-2xl text-[#611cb7] font-bold company-name">MM Bakery</a>

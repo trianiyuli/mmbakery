@@ -16,7 +16,12 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-        return view('admin.dashboard');
+        // return view('admin.dashboard');
+        $totalUsers = User::count();
+        $totalProducts = Product::count();
+        $featuredProducts = Product::where('unggulan', true)->limit(3)->get();
+    
+        return view('admin.dashboard', compact('totalUsers', 'totalProducts', 'featuredProducts'));
     }
 
     // public function products()
@@ -79,8 +84,16 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'role' => 'required|in:admin,superadmin',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[0-9]/', // harus ada angka
+            ],
             'profile-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ], [
+            'password.regex' => 'Password harus mengandung minimal satu angka.'
         ]);
 
         // Handle file upload
@@ -98,6 +111,10 @@ class AdminController extends Controller
             'photo' => $photoPath
         ]);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
+
         return redirect()->route('admin.users')->with('success', 'User berhasil dibuat');
     }
 
@@ -108,12 +125,19 @@ class AdminController extends Controller
             'edit_name' => 'required|string|max:255',
             'edit_email' => 'required|email|unique:users,email,'.$user->id,
             'edit_role' => 'sometimes|in:admin,superadmin',
-            'edit_password' => 'nullable|string|min:8|same:edit_confirm_password',
+            'edit_password' => [
+                'nullable',
+                'string',
+                'min:8',
+                'same:edit_confirm_password',
+                'regex:/[0-9]/', // harus ada angka
+            ],
             'edit_confirm_password' => 'nullable|required_with:edit_password|string|min:8',
             'edit_profile-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'edit_password.same' => 'The password and confirmation password do not match.',
-            'edit_confirm_password.required_with' => 'Please confirm your password.'
+            'edit_confirm_password.required_with' => 'Please confirm your password.',
+            'edit_password.regex' => 'Password harus mengandung minimal satu angka.'
         ]);
     
         // Handle file upload jika ada
@@ -141,6 +165,10 @@ class AdminController extends Controller
         }
     
         $user->save();
+    
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
     
         return redirect()->route('admin.users')->with('success', 'User updated successfully');
     }
@@ -204,9 +232,19 @@ class AdminController extends Controller
             'deskripsi' => 'nullable|string'
         ]);
 
+        // CEK MAKSIMAL 3 PRODUK UNGGULAN
+        if ($request->has('unggulan')) {
+            $count = \App\Models\Product::where('unggulan', true)->count();
+            if ($count >= 3) {
+                return response()->json([
+                    'errors' => ['unggulan' => ['Maksimal hanya 3 produk unggulan.']]
+                ], 422);
+            }
+        }
+
         $imagePath = $request->file('gambar')->store('product-images', 'public');
 
-        Product::create([
+        \App\Models\Product::create([
             'nama' => $validated['nama'],
             'harga' => $validated['harga'],
             'gambar' => $imagePath,
@@ -237,9 +275,20 @@ class AdminController extends Controller
             'unggulan' => 'sometimes',
             'deskripsi' => 'nullable|string'
         ]);
+
+        // CEK MAKSIMAL 3 PRODUK UNGGULAN
+        $unggulanRequest = $request->has('unggulan');
+        if ($unggulanRequest && !$product->unggulan) {
+            $count = \App\Models\Product::where('unggulan', true)->count();
+            if ($count >= 3) {
+                return response()->json([
+                    'errors' => ['unggulan' => ['Maksimal hanya 3 produk unggulan.']]
+                ], 422);
+            }
+        }
     
         if ($request->hasFile('gambar')) {
-            Storage::disk('public')->delete($product->gambar);
+            \Storage::disk('public')->delete($product->gambar);
             $imagePath = $request->file('gambar')->store('product-images', 'public');
             $product->gambar = $imagePath;
         }
@@ -248,7 +297,7 @@ class AdminController extends Controller
             'nama' => $validated['nama'],
             'harga' => $validated['harga'],
             'kategori' => $validated['kategori'],
-            'unggulan' => $request->has('unggulan') ? true : false,
+            'unggulan' => $unggulanRequest ? true : false,
             'deskripsi' => $validated['deskripsi'] ?? null
         ]);
     
@@ -271,4 +320,26 @@ class AdminController extends Controller
             return redirect()->route('admin.products')->with('error', 'Failed to delete product');
         }
     }
+
+    // --- TOGGLE FEATURED PRODUCT ---
+    public function toggleFeatured(Request $request, Product $product)
+    {
+        $setFeatured = !$product->unggulan;
+        if ($setFeatured) {
+            $count = Product::where('unggulan', true)->count();
+            if ($count >= 3) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Maksimal hanya 3 produk unggulan.'
+                ], 422);
+            }
+        }
+        $product->unggulan = $setFeatured;
+        $product->save();
+        return response()->json([
+            'success' => true,
+            'unggulan' => $product->unggulan
+        ]);
+    }
+    // --- TOGGLE FEATURED PRODUCT ---
 }

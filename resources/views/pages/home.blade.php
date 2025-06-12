@@ -3,10 +3,25 @@
 @section('title', 'MM Bakery - Roti Segar Berkualitas')
 
 @section('content')
+    @include('pages.components.home.detail-produk')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <style>
+        /* Animation for modal entrance */
+        @keyframes modal-entrance {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Animation for modal exit */
+        @keyframes modal-exit {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0; }
+        }
+    </style>
+
     <!-- Hero Carousel with Improved Animations -->
-    <section id="beranda" class="relative w-full h-screen overflow-hidden" x-data="{ current: 0, images: [
+    <section id="beranda" class="relative w-full h-[60vh] sm:h-[80vh] lg:h-screen overflow-hidden" x-data="{ current: 0, images: [
         { src: '{{ asset('images/carousel/image2.png') }}', title: 'Selamat Datang di MM Bakery', desc: 'Kami menyediakan berbagai macam roti segar dengan bahan berkualitas tinggi dan cita rasa terbaik.'},
         { src: '{{ asset('images/carousel/image1.png') }}', title: 'Roti Segar Setiap Hari', desc: 'Dibuat dengan bahan pilihan dan dipanggang dengan sempurna.'},
         { src: '{{ asset('images/carousel/image3.jpg') }}', title: 'Nikmati Kelezatan Kami', desc: 'Tersedia berbagai varian roti untuk setiap selera.'}
@@ -18,181 +33,161 @@
                  x-transition:leave="opacity-100 scale-100" 
                  x-transition:leave-end="opacity-0 scale-90">
                 <img :src="image.src" class="w-full h-full object-cover transform transition-transform duration-10000" :class="current === index ? 'scale-100' : 'scale-110'" :alt="image.title">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-transparent flex flex-col justify-center items-center text-center px-6">
-                    <div class="max-w-4xl" data-aos="fade-up" data-aos-delay="100">
-                        <h2 class="text-4xl md:text-6xl font-bold mb-4 text-white" x-text="image.title"></h2>
-                        <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed" x-text="image.desc"></p>
-                        <!-- <a :href="index === 0 ? '#produk' : index === 1 ? '#tentang' : '#outlet'" 
-                           class="inline-block px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-full transition duration-300 transform hover:scale-105"
-                           data-aos="fade-up" data-aos-delay="300">
-                            <span x-text="image.cta"></span>
-                            <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a> -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-transparent flex flex-col justify-center items-center text-center px-4 sm:px-6">
+                    <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="600">
+                        <h2 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 text-white" x-text="image.title"></h2>
+                        <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4" x-text="image.desc"></p>
                     </div>
                 </div>
             </div>
         </template>
 
         <!-- Carousel Indicators -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+        <div class="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
             <template x-for="(_, index) in images" :key="index">
                 <button @click="current = index" 
-                        class="w-3 h-3 rounded-full transition-all duration-300" 
-                        :class="current === index ? 'bg-white w-8' : 'bg-white/50'"
+                        class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-all duration-300" 
+                        :class="current === index ? 'bg-white w-4 sm:w-6' : 'bg-white/50'"
                         aria-label="Go to slide">
                 </button>
             </template>
         </div>
     </section>
 
-    <!-- Produk Unggulan with Floating Animation -->
-    <section id="produk" class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Produk Unggulan Kami</h2>
-            <div class="w-24 h-1 bg-purple-600 mx-auto mb-6"></div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Temukan kelezatan roti segar kami yang dibuat dengan bahan pilihan dan penuh cinta.</p>
+    <!-- Produk Unggulan -->
+    <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
+        <div class="text-center mb-6 sm:mb-12" data-aos="fade-up" data-aos-duration="500">
+            <div class="flex items-center gap-2 mb-3 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 sm:h-6 w-5 sm:w-6 text-yellow-400 drop-shadow-glow" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z"/>
+                </svg>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Produk Unggulan Kami</h2>
+            </div>
+            <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto mb-3 sm:mb-4"></div>
+            <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-4">Temukan kelezatan roti segar kami yang dibuat dengan bahan pilihan dan penuh cinta.</p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach([['Roti Pisang Keju', 'unggulan1.jpg', 'Rp 25.000'], ['Coklat Pisang', 'unggulan2.jpg', 'Rp 28.000'], ['Srikaya Pandan', 'unggulan3.jpg', 'Rp 22.000']] as $produk)
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300 hover:shadow-xl"
-                 data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="h-64 bg-gray-50 flex justify-center items-center p-6">
-                    <img src="{{ asset('images/produk/'.$produk[1]) }}" alt="{{ $produk[0] }}" class="h-full w-full object-contain hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6 text-center">
-                    <h5 class="text-xl font-semibold text-gray-800 mb-2">{{ $produk[0] }}</h5>
-                    <p class="text-lg font-bold text-purple-600 mb-4">{{ $produk[2] }}</p>
-                    <button class="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-200 transition">
-                        Detail Produk
-                    </button>
-                </div>
+        @if($featuredProducts->count() > 0)
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 justify-items-center">
+            @foreach($featuredProducts as $product)
+            <div class="relative bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 border-2 border-yellow-400/50 rounded-xl shadow-lg p-3 sm:p-4 flex flex-col items-center w-full max-w-[280px] sm:max-w-xs transition-transform hover:scale-105 hover:shadow-2xl group cursor-pointer" 
+                 data-aos="fade-up" 
+                 data-aos-duration="400"
+                 data-aos-delay="{{ $loop->index * 50 }}">
+                <span class="absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-lg border border-yellow-300 z-10 flex items-center gap-1 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z"/>
+                    </svg>
+                    Unggulan
+                </span>
+                
+                <img src="{{ asset('storage/'.$product->gambar) }}" alt="{{ $product->nama }}" 
+                     class="h-20 sm:h-24 w-20 sm:w-24 rounded-full object-cover border-4 border-yellow-400/30 shadow-lg mb-2 group-hover:border-yellow-400 transition-all duration-300">
+                
+                <div class="text-sm sm:text-base font-bold text-gray-800 text-center mb-1">{{ $product->nama }}</div>
+                <div class="text-xs sm:text-sm text-yellow-600 mb-1">Rp {{ number_format($product->harga, 0, ',', '.') }}</div>
+                
+                <button onclick="showFeaturedDetailModal({{ json_encode($product) }})" 
+                        class="mt-3 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 cursor-pointer w-full sm:w-auto">
+                    Detail Produk
+                </button>
             </div>
             @endforeach
         </div>
-        
-        <div class="text-center mt-12" data-aos="fade-up">
-            <a href="{{ route('produk') }}" class="inline-block px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-full transition duration-300">
+        @else
+        <div class="text-center py-6 sm:py-8 bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl mx-4" 
+             data-aos="fade-up" 
+             data-aos-duration="400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 sm:h-12 w-10 sm:w-12 mx-auto text-yellow-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="text-base sm:text-lg font-medium text-gray-700 mb-2">Belum ada produk unggulan</h3>
+            <p class="text-sm sm:text-base text-gray-500 mb-4 px-4">Kami sedang menyiapkan produk terbaik untuk Anda</p>
+            <a href="{{ route('produk') }}" class="inline-block px-4 py-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-full hover:from-yellow-600 hover:to-amber-600 transition transform hover:scale-105">
                 Lihat Semua Produk
+            </a>
+        </div>
+        @endif
+        
+        <div class="text-center mt-6 sm:mt-8" 
+             data-aos="fade-up" 
+             data-aos-duration="400">
+            <a href="{{ route('produk') }}" class="inline-flex items-center px-4 sm:px-6 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden group cursor-pointer">
+                <span class="relative z-10">Lihat Semua Produk</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 ml-2 relative z-10" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
             </a>
         </div>
     </section>
 
     <!-- Tentang Kami with Enhanced Visuals -->
-    <section id="tentang" class="bg-purple-50 py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div class="order-2 md:order-1" data-aos="fade-right">
-                <h2 class="text-4xl font-bold text-gray-800 mb-6">Tentang Kami</h2>
-                <div class="w-20 h-1 bg-purple-600 mb-6"></div>
+    <section id="tentang" class="bg-purple-50 py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 items-center">
+            <div class="order-2 md:order-1" data-aos="fade-right" data-aos-duration="500">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Tentang Kami</h2>
+                <div class="w-16 sm:w-20 h-1 bg-purple-600 mb-4"></div>
                 
-                <div class="space-y-4 text-gray-700">
-                    <p class="text-justify">
+                <div class="space-y-3 text-gray-700">
+                    <p class="text-sm sm:text-base text-justify">
                         Pada tahun 2008, dengan pengalaman dan kecintaan mendalam terhadap dunia roti dan kue, MM Bakery lahir di Madiun.
                         Nama "MM" sendiri terinspirasi dari Maimunah, sosok ibu yang penuh kasih dan menjadi pilar utama di balik perjalanan sang pemilik.
                     </p>
-                    <p class="text-justify">
+                    <p class="text-sm sm:text-base text-justify">
                         Seiring berjalannya waktu, MM Bakery terus berkembang dan kini telah memiliki 6 outlet berkat dukungan serta kepercayaan dari pelanggan setia.
                         Kami berkomitmen untuk selalu menghadirkan kualitas terbaik dan pelayanan istimewa.
                     </p>
                 </div>
                 
-                <div class="mt-8 flex items-center space-x-6">
+                <div class="mt-6 flex items-center space-x-4 sm:space-x-6">
                     <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                             </svg>
                         </div>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-500">Didirikan</p>
-                            <p class="text-lg font-semibold text-gray-800">2008</p>
+                        <div class="ml-2 sm:ml-3">
+                            <p class="text-xs sm:text-sm font-medium text-gray-500">Didirikan</p>
+                            <p class="text-base sm:text-lg font-semibold text-gray-800">2008</p>
                         </div>
                     </div>
                     
                     <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                         </div>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-500">Outlet</p>
-                            <p class="text-lg font-semibold text-gray-800">6+</p>
+                        <div class="ml-2 sm:ml-3">
+                            <p class="text-xs sm:text-sm font-medium text-gray-500">Outlet</p>
+                            <p class="text-base sm:text-lg font-semibold text-gray-800">6+</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="order-1 md:order-2 relative" data-aos="fade-left">
+            <div class="order-1 md:order-2 relative" data-aos="fade-left" data-aos-duration="500">
                 <div class="relative rounded-xl overflow-hidden shadow-xl">
                     <img src="{{ asset('images/carousel/tentang.jpg') }}" class="w-full h-auto" alt="Tentang MM Bakery">
                     <div class="absolute inset-0 bg-gradient-to-t from-purple-900/40 via-purple-900/20 to-transparent"></div>
                 </div>
-                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-100 rounded-xl -z-10"></div>
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-purple-200 rounded-xl -z-10"></div>
+                <div class="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-24 sm:w-32 h-24 sm:h-32 bg-purple-100 rounded-xl -z-10"></div>
+                <div class="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-20 sm:w-24 h-20 sm:h-24 bg-purple-200 rounded-xl -z-10"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Outlet with Interactive Cards -->
-    <section id="outlet" class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Outlet Kami</h2>
-            <div class="w-24 h-1 bg-purple-600 mx-auto mb-6"></div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Temukan outlet MM Bakery terdekat di kota Anda</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach([
-                ['Outlet Pusat', 'Jl. Mayor Jendral Di Panjaitan No.79, Banjarejo, Taman, Kota Madiun, Jawa Timur 63137', 'outletpusat.jpg', 'https://maps.app.goo.gl/7DtW4KQfvSSU2S6N6'],
-                ['Outlet Cabang 1', 'Jalan Raya Kajang RT.23/RW.4 Candi, Kabupaten Madiun, Jawa Timur 63151', 'cabang1.jpg', 'https://maps.app.goo.gl/W7ab3HqBv6M9o85Q9'],
-                ['Outlet Cabang 2', 'Jl. Raya Pagotan, RT.30/RW.8, Gilingan, Uteran, Geger, Kabupaten Madiun, Jawa Timur 63171', 'cabang2.jpg', '#']
-            ] as $outlet)
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.02] transition duration-300"
-                 data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="h-48 overflow-hidden">
-                    <img src="{{ asset('images/foto_outlet/'.$outlet[2]) }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" alt="{{ $outlet[0] }}">
-                </div>
-                <div class="p-6">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0">
-                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-lg font-bold text-gray-800">{{ $outlet[0] }}</h3>
-                            <!-- <p class="mt-1 text-sm text-gray-600">{{ $outlet[1] }}</p> -->
-                        </div>
-                    </div>
-                    <a href="{{ $outlet[3] }}" target="_blank" class="mt-6 inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-full transition duration-300 w-full justify-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                        </svg>
-                        Lihat di Google Maps
-                    </a>
-                </div>
-            </div>
-            @endforeach
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="bg-purple-700 py-16 md:py-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Siap Menikmati Roti Segar Kami?</h2>
-            <p class="text-lg text-purple-100 mb-8">Kunjungi outlet terdekat atau hubungi kami untuk pemesanan khusus</p>
+    <section class="bg-gradient-to-r from-purple-700 to-pink-700 py-12 sm:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Siap Menikmati Roti Segar Kami?</h2>
+            <p class="text-base sm:text-lg text-purple-100 mb-6">Kunjungi outlet terdekat atau hubungi kami untuk pemesanan khusus</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="{{ route('outlet') }}" class="px-8 py-3 bg-white text-purple-700 font-medium rounded-full hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('outlet') }}" class="px-6 py-2.5 bg-white text-purple-700 font-medium rounded-full hover:bg-gray-100 transition duration-300 transform hover:scale-105 shadow-lg cursor-pointer text-sm sm:text-base">
                     Cari Outlet Terdekat
                 </a>
-                <a href="{{ route('kontak') }}" class="px-8 py-3 border-2 border-white text-white font-medium rounded-full hover:bg-purple-600 transition duration-300">
+                <a href="{{ route('kontak') }}" class="px-6 py-2.5 border-2 border-white text-white font-medium rounded-full hover:bg-purple-600/20 transition duration-300 transform hover:scale-105 cursor-pointer text-sm sm:text-base">
                     Hubungi Kami
                 </a>
             </div>
@@ -202,11 +197,34 @@
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Fungsi untuk mengubah z-index navbar
+        function toggleNavbarZIndex(showModal) {
+            const navbar = document.querySelector('nav');
+            if (showModal) {
+                navbar.classList.remove('z-50');
+            } else {
+                navbar.classList.add('z-50');
+            }
+        }
         AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
+            duration: 200,
+            easing: 'ease-out',
             once: true,
-            offset: 100
+            offset: 1,
+            delay: 0,
+            anchorPlacement: 'top-bottom'
+        });
+    </script>
+
+    <script>
+        // Fungsi untuk mengatur ulang AOS saat resize window
+        window.addEventListener('resize', () => {
+            AOS.refresh();
+        });
+
+        // Fungsi untuk memastikan AOS bekerja dengan baik setelah semua konten dimuat
+        window.addEventListener('load', () => {
+            AOS.refresh();
         });
     </script>
 @endsection

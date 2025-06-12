@@ -1,5 +1,5 @@
-<div id="delete-user-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center p-4">
-    <div class="relative mx-auto p-6 border w-full max-w-md shadow-xl rounded-lg bg-white animate-fade-in">
+<div id="delete-user-modal" class="fixed inset-0 bg-opacity-50 flex items-center justify-center hidden z-50 backdrop-blur">
+    <div class="bg-white rounded-lg p-6 w-full border border-red-200 max-w-md transform transition-all duration-300 ease-out scale-95 opacity-0">
         <!-- Modal content -->
         <div class="text-center">
             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
@@ -8,10 +8,10 @@
                 </svg>
             </div>
             
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">Hapus User</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Hapus User</h3>
             
             <div class="mb-6">
-                <p id="delete-user-message" class="text-gray-600">
+                <p id="delete-user-message" class="text-gray-500">
                     Apakah Anda yakin ingin menghapus user ini? Aksi ini tidak dapat dibatalkan.
                 </p>
             </div>
@@ -34,24 +34,9 @@
     </div>
 </div>
 
-<style>
-    .animate-fade-in {
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-</style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Function to close this modal
-    function closeDeleteUserModal() {
-        document.getElementById('delete-user-modal').classList.add('hidden');
-    }
-    
-    // Function to open delete modal with user data
+    // Function to open modal with animation
     function openDeleteUserModal(userId, userName) {
         const modal = document.getElementById('delete-user-modal');
         const form = document.getElementById('deleteUserForm');
@@ -65,12 +50,69 @@
         document.getElementById('delete_user_id').value = userId;
         
         modal.classList.remove('hidden');
+        // Add slight delay to allow display property to take effect before animation
+        setTimeout(() => {
+            modal.querySelector('div').classList.remove('scale-95', 'opacity-0');
+            modal.querySelector('div').classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+    
+    // Function to close modal with animation
+    function closeDeleteUserModal() {
+        const modal = document.getElementById('delete-user-modal');
+        modal.querySelector('div').classList.remove('scale-100', 'opacity-100');
+        modal.querySelector('div').classList.add('scale-95', 'opacity-0');
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
     }
     
     // Handle click outside modal to close
     document.getElementById('delete-user-modal').addEventListener('click', function(event) {
         if (event.target === this) {
             closeDeleteUserModal();
+        }
+    });
+
+    document.getElementById('deleteUserForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                },
+                body: formData
+            });
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'User berhasil dihapus.',
+                    showConfirmButton: true,
+                    timer: 1000,
+                    timerProgressBar: true
+                }).then(() => {
+                    closeDeleteUserModal();
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: 'Terjadi kesalahan server.'
+                });
+            }
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: 'Tidak dapat terhubung ke server.'
+            });
         }
     });
 </script>

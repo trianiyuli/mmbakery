@@ -6,10 +6,10 @@
 <div class="bg-purple-50 min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header Section -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Outlet Kami</h2>
-            <div class="w-24 h-1 bg-purple-600 mx-auto mt-4 mb-6"></div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Temukan outlet MM Bakery terdekat dan nikmati roti segar kami</p>
+        <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Outlet Kami</h2>
+            <div class="w-16 sm:w-24 h-1 bg-purple-600 mx-auto mt-3 sm:mt-4 mb-4 sm:mb-6"></div>
+            <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">Temukan outlet MM Bakery terdekat dan nikmati roti segar kami</p>
         </div>
 
         <!-- Main Content -->
@@ -44,54 +44,41 @@
                             'name' => 'MM Bakery Pusat Madiun',
                             'jam' => '06.00 - 20.00',
                             'address' => 'Jl. Mayor Jendral Di Panjaitan No.79, Banjarejo, Kec. Taman, Kota Madiun, Jawa Timur 63137',
-                            'map' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.301833137832!2d111.5300755!3d-7.650657600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79be8394a4148b%3A0x9221a2f81f144c72!2sToko%20Roti%20MM%20Bakery%20Pusat%20Madiun!5e0!3m2!1sid!2sid!4v1744786268263!5m2!1sid!2sid',
-                            'image' => 'outletpusat.jpg'
+                            'map' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.301833137832!2d111.5300755!3d-7.650657600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79be8394a4148b%3A0x9221a2f81f144c72!2sToko%20Roti%20MM%20Bakery%20Pusat%20Madiun!5e0!3m2!1sid!2sid!4v1744786268263!5m2!1sid!2sid'
                         ],
                         [
                             'name' => 'MM Bakery Cab. Bagi',
                             'jam' => '06.00 - 20.00',
                             'address' => 'Jalan Raya Kajang RT.23/RW.4 Candi, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur 63151',
-                            'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d126537.66097439079!2d111.4476729!3d-7.6506498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79c0ead5238d47%3A0xaaf4c3699d322c94!2sMM%20Bakery%20Bagi!5e0!3m2!1sid!2sid!4v1744786322883!5m2!1sid!2sid',
-                            'image' => 'cabang1.jpg'
+                            'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d126537.66097439079!2d111.4476729!3d-7.6506498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79c0ead5238d47%3A0xaaf4c3699d322c94!2sMM%20Bakery%20Bagi!5e0!3m2!1sid!2sid!4v1744786322883!5m2!1sid!2sid'
                         ],
                         [
                             'name' => 'MM Bakery Cab. Pagotan',
                             'jam' => '06.00 - 20.00',
                             'address' => 'Jl. Raya Pagotan, RT.30/RW.8, Gilingan, Uteran, Kec. Geger, Kabupaten Madiun, Jawa Timur 63171',
-                            'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d126537.66097439079!2d111.4476729!3d-7.6506498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bcee197354d9%3A0x8073d5bdab21d30f!2sToko%20Roti%20MM%20Bakery%20Cab.%20Pagotan!5e0!3m2!1sid!2sid!4v1744786348630!5m2!1sid!2sid',
-                            'image' => 'cabang2.jpg'
+                            'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d126537.66097439079!2d111.4476729!3d-7.6506498!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bcee197354d9%3A0x8073d5bdab21d30f!2sToko%20Roti%20MM%20Bakery%20Cab.%20Pagotan!5e0!3m2!1sid!2sid!4v1744786348630!5m2!1sid!2sid'
                         ],
                     ];
                 @endphp
 
                 @foreach ($locations as $index => $loc)
                 <div onclick="changeMap('{{ $loc['map'] }}', '{{ $loc['name'] }}')" 
-                    class="outlet-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-l-4 border-purple-600 group">
-                    <div class="flex h-full">
-                        <!-- Outlet Image -->
-                        <div class="w-1/3 flex-shrink-0">
-                            <img src="{{ asset('images/foto_outlet/'.$loc['image']) }}" 
-                                alt="{{ $loc['name'] }}" 
-                                class="w-full h-full object-cover">
+                    class="outlet-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-l-4 border-purple-600 group p-4">
+                    <div class="flex flex-col">
+                        <h3 class="text-lg font-bold text-gray-800 group-hover:text-purple-700">{{ $loc['name'] }}</h3>
+                        <div class="flex items-center mt-2 text-sm text-purple-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ $loc['jam'] }}
                         </div>
-                        
-                        <!-- Outlet Info -->
-                        <div class="p-4 w-2/3 flex flex-col">
-                            <h3 class="text-lg font-bold text-gray-800 group-hover:text-purple-700">{{ $loc['name'] }}</h3>
-                            <div class="flex items-center mt-1 text-sm text-purple-600">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                {{ $loc['jam'] }}
-                            </div>
-                            <div class="mt-2 text-sm text-gray-600 overflow-y-auto max-h-20 pr-2">
-                                {{ $loc['address'] }}
-                            </div>
-                            <div class="mt-auto pt-2 flex justify-end">
-                                <button class="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full group-hover:bg-purple-600 group-hover:text-white transition">
-                                    Lihat Peta
-                                </button>
-                            </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            {{ $loc['address'] }}
+                        </div>
+                        <div class="mt-4 flex justify-end">
+                            <button class="text-sm px-4 py-2 bg-purple-100 text-purple-700 rounded-full group-hover:bg-purple-600 group-hover:text-white transition">
+                                Lihat Peta
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -101,23 +88,16 @@
 
         <!-- Additional Info -->
         <div class="mt-16 bg-white rounded-xl shadow-md p-8 max-w-4xl mx-auto">
-            <div class="text-center">
+            <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Jam Operasional</h3>
                 <div class="w-16 h-1 bg-purple-600 mx-auto mb-6"></div>
+                <p class="text-gray-600">Kami melayani Anda setiap hari</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="text-lg font-medium text-purple-700 mb-2">Senin - Jumat</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-purple-50 rounded-lg p-4 text-center transform transition-all duration-300 hover:scale-105">
+                    <div class="text-lg font-medium text-purple-700 mb-2">Senin - Minggu</div>
                     <div class="text-gray-600">06.00 - 20.00 WIB</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-lg font-medium text-purple-700 mb-2">Sabtu</div>
-                    <div class="text-gray-600">06.00 - 21.00 WIB</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-lg font-medium text-purple-700 mb-2">Minggu & Libur</div>
-                    <div class="text-gray-600">07.00 - 20.00 WIB</div>
                 </div>
             </div>
         </div>
@@ -136,6 +116,19 @@
             card.classList.remove('ring-2', 'ring-purple-500');
         });
         event.currentTarget.classList.add('ring-2', 'ring-purple-500');
+
+        // Auto-scroll to map on mobile
+        if (window.innerWidth < 1024) { // 1024px is the breakpoint for lg
+            const mapSection = document.getElementById('mapIframe');
+            const headerOffset = 80; // Adjust this value based on your header height
+            const elementPosition = mapSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
     }
 
     // Initialize first card as active

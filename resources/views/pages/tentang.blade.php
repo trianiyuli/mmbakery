@@ -5,8 +5,8 @@
 @section('content')
 <div class="bg-purple-50 py-12">
     <!-- Tentang Kami Section -->
-    <section id="tentang" class="max-w-6xl mx-auto px-4">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
+    <section id="tentang" class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <!-- Gambar -->
             <div class="w-full lg:w-1/2">
                 <div class="relative rounded-xl overflow-hidden shadow-xl">
@@ -19,15 +19,15 @@
 
             <!-- Teks -->
             <div class="w-full lg:w-1/2">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Tentang Kami</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">Tentang Kami</h2>
                 <div class="w-20 h-1 bg-purple-600 mb-6"></div>
                 
                 <div class="space-y-4 text-gray-700">
-                    <p class="text-justify">
+                    <p class="text-base sm:text-lg text-justify">
                         Pada tahun 2008, dengan pengalaman dan kecintaan mendalam terhadap dunia roti dan kue, MM Bakery lahir di Madiun.
                         Nama "MM" sendiri terinspirasi dari Maimunah, sosok ibu yang penuh kasih dan menjadi pilar utama di balik perjalanan sang pemilik.
                     </p>
-                    <p class="text-justify">
+                    <p class="text-base sm:text-lg text-justify">
                         Seiring berjalannya waktu, MM Bakery terus berkembang dan kini telah memiliki 6 outlet berkat dukungan serta kepercayaan dari pelanggan setia.
                         Kami berkomitmen untuk selalu menghadirkan kualitas terbaik dan pelayanan istimewa.
                     </p>
@@ -48,15 +48,15 @@
     </section>
 
     <!-- Visi dan Misi Section -->
-    <section id="visi-misi" class="max-w-6xl mx-auto px-4 mt-16">
+    <section id="visi-misi" class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Visi & Misi MM Bakery</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Visi & Misi MM Bakery</h2>
             <div class="w-24 h-1 bg-purple-600 mx-auto mt-4"></div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
             <!-- Visi Card -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-purple-600 transform hover:-translate-y-1">
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-purple-600 transform hover:-translate-y-1">
                 <div class="flex items-center mb-4">
                     <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-4">
                         <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -64,24 +64,24 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-purple-800">Visi MM GROUP</h3>
+                    <h3 class="text-lg sm:text-xl font-bold text-purple-800">Visi MM GROUP</h3>
                 </div>
-                <p class="text-gray-700">
+                <p class="text-base sm:text-lg text-gray-700">
                     Menyediakan produk roti yang berkualitas tinggi dengan harga yang terjangkau serta mampu bersaing memberikan pelayanan prima terhadap konsumen.
                 </p>
             </div>
 
             <!-- Misi Card -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-purple-600 transform hover:-translate-y-1">
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-purple-600 transform hover:-translate-y-1">
                 <div class="flex items-center mb-4">
                     <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-4">
                         <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-purple-800">Misi MM GROUP</h3>
+                    <h3 class="text-lg sm:text-xl font-bold text-purple-800">Misi MM GROUP</h3>
                 </div>
-                <ul class="space-y-3 text-gray-700 list-disc pl-5">
+                <ul class="space-y-3 text-base sm:text-lg text-gray-700 list-disc pl-5">
                     <li>Menciptakan tenaga kerja yang ahli dan kompeten serta memiliki IMTAQ dan IPTEK yang kuat.</li>
                     <li>Memberikan pelayanan prima/extra demi kepuasan konsumen.</li>
                     <li>Menjadi perusahaan yang mumpuni di bidangnya.</li>
@@ -93,36 +93,96 @@
     </section>
 
     <!-- Sertifikasi Halal Section -->
-    <section id="sertifikasi-halal" class="max-w-4xl mx-auto px-4 mt-16 bg-white rounded-xl shadow-lg p-8">
+    <section id="sertifikasi-halal" class="max-w-4xl mx-auto px-4 sm:px-6 mt-16 bg-white rounded-xl shadow-lg p-6 sm:p-8">
         <div class="flex flex-col md:flex-row items-center gap-8">
             <div class="w-full md:w-auto flex-shrink-0">
-                <img src="{{ asset('images/sertifikasi-halal.png') }}" 
-                     alt="Sertifikasi Halal" 
-                     class="w-32 h-32 object-contain">
+                <!-- Image Carousel -->
+                <div class="relative w-full md:w-[300px] h-[300px] overflow-hidden rounded-lg" x-data="{ 
+                    currentImage: 1,
+                    images: [
+                        '{{ asset('images/tentangkami/SH_MM BAKERY_1.jpg') }}',
+                        '{{ asset('images/tentangkami/SH_MM BAKERY_2.jpg') }}',
+                        '{{ asset('images/tentangkami/SH_MM BAKERY_3.jpg') }}'
+                    ]
+                }" x-init="setInterval(() => {
+                    currentImage = currentImage === 3 ? 1 : currentImage + 1;
+                }, 5000)">
+                    <!-- Image 1 -->
+                    <div x-show="currentImage === 1" 
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-500"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform -translate-x-full">
+                        <img src="{{ asset('images/tentangkami/SH_MM BAKERY_1.jpg') }}" 
+                             alt="Sertifikasi Halal 1" 
+                             class="w-full h-full object-contain">
+                    </div>
+                    <!-- Image 2 -->
+                    <div x-show="currentImage === 2"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-500"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform -translate-x-full">
+                        <img src="{{ asset('images/tentangkami/SH_MM BAKERY_2.jpg') }}" 
+                             alt="Sertifikasi Halal 2" 
+                             class="w-full h-full object-contain">
+                    </div>
+                    <!-- Image 3 -->
+                    <div x-show="currentImage === 3"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-500"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform -translate-x-full">
+                        <img src="{{ asset('images/tentangkami/SH_MM BAKERY_3.jpg') }}" 
+                             alt="Sertifikasi Halal 3" 
+                             class="w-full h-full object-contain">
+                    </div>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        <button @click="currentImage = 1" 
+                                :class="{'bg-purple-600': currentImage === 1, 'bg-gray-300': currentImage !== 1}"
+                                class="w-2 h-2 rounded-full transition-colors duration-300"></button>
+                        <button @click="currentImage = 2" 
+                                :class="{'bg-purple-600': currentImage === 2, 'bg-gray-300': currentImage !== 2}"
+                                class="w-2 h-2 rounded-full transition-colors duration-300"></button>
+                        <button @click="currentImage = 3" 
+                                :class="{'bg-purple-600': currentImage === 3, 'bg-gray-300': currentImage !== 3}"
+                                class="w-2 h-2 rounded-full transition-colors duration-300"></button>
+                    </div>
+                </div>
             </div>
             <div>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Sertifikasi Halal</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Sertifikasi Halal</h2>
                 <div class="w-20 h-1 bg-purple-600 mb-4"></div>
-                <p class="text-gray-700">
+                <p class="text-base sm:text-lg text-gray-700">
                     MM Bakery telah bersertifikat Halal dan menggunakan bahan-bahan berkualitas tinggi tanpa pengawet buatan, sehingga aman dan sehat untuk dikonsumsi oleh semua kalangan.
                 </p>
-                <div class="mt-4 flex items-center text-sm text-purple-600">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Bahan berkualitas tinggi
-                </div>
-                <div class="mt-1 flex items-center text-sm text-purple-600">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Tanpa pengawet buatan
-                </div>
-                <div class="mt-1 flex items-center text-sm text-purple-600">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Proses produksi higienis
+                <div class="mt-4 space-y-2">
+                    <div class="flex items-center text-sm sm:text-base text-purple-600">
+                        <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Bahan berkualitas tinggi</span>
+                    </div>
+                    <div class="flex items-center text-sm sm:text-base text-purple-600">
+                        <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Tanpa pengawet buatan</span>
+                    </div>
+                    <div class="flex items-center text-sm sm:text-base text-purple-600">
+                        <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Proses produksi higienis</span>
+                    </div>
                 </div>
             </div>
         </div>
